@@ -74,16 +74,16 @@ public class HelloApplication extends Application {
         //
         //Buttons
         Button back = new Button("Back");//Wird überall verwendet.
-        Button sucheID = new Button("Suche ID");//In Suche verwendet
-        Button sucheTitel = new Button("Suche Titel");//In Suche verwendet
-        Button sucheGenre = new Button("Suche nach Genre");//In Suche verwendet.
+        Button sucheID = new Button("Search ID");//In Suche verwendet
+        Button sucheTitel = new Button("Search for title");//In Suche verwendet
+        Button sucheGenre = new Button("Search by genre");//In Suche verwendet.
         Button reload = new Button("Reload");
         //
-        Button findeMediumArt = new Button("Suche nach Medium");//In Suche verwendet
+        Button findeMediumArt = new Button("“Search by medium”");//In Suche verwendet
         Button send = new Button("Save");//In Eintrag verwendet.
         //
         Button suche = new Button("Vault");//Wird in der ersten Stage verwendet
-        Button eintrag = new Button("Hinzufügen");//Wird in der ersten Stage verwendet
+        Button eintrag = new Button("ADD");//Wird in der ersten Stage verwendet
         //
         //Labels:
         Label hauptBanner = new Label();//Soll als Überschrift mittig oben in der ersten Scene angezeigt werden also auch wo Suche delte tec stehen (bearbeiten generell noch bauen)
@@ -93,26 +93,26 @@ public class HelloApplication extends Application {
         //Text
         Text unterteilung = new Text();
         unterteilung.getStyleClass().add("wabeldi");//Warum klappt das ni
-        unterteilung.setText("Zusätzliche Felder zur Eingabe einer Änderung:");
+        unterteilung.setText("Additional fields for entering a change:");
         //
         //TextFiekd
         TextField titel = new TextField();
-        titel.setPromptText("Titel");
+        titel.setPromptText("Title");
         TextField genre = new TextField();
         genre.setPromptText("Genre");
         TextField description = new TextField();//
         description.setPromptText("Description");
         TextField art = new TextField();
-        art.setPromptText("Art");
+        art.setPromptText("Type");
         TextField url = new TextField();
-        url.setPromptText("Url");
+        url.setPromptText("URL");
         TextField fieldForTitle = new TextField();
         fieldForTitle.setPromptText("Title");
         TextField findByArt = new TextField();
-        findByArt.setPromptText("Art");
+        findByArt.setPromptText("Type");
         //
         //CheckBoxen:
-        CheckBox gesehen = new CheckBox("Gesehen/Gelesen?");//Noch bei bearbeiten hinzufügen, relativ wichtig.
+        CheckBox gesehen = new CheckBox("Watched/Read?");//Noch bei bearbeiten hinzufügen, relativ wichtig.
         //
         //Accordeon:
         Accordion accordion = new Accordion();
@@ -233,7 +233,7 @@ public class HelloApplication extends Application {
             //
             box4.getChildren().clear();//Eventuell auch weil ich das nicht gemacht habe ständig abgeschmiert.
             box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
-            stage2.setTitle("Suche");
+            stage2.setTitle("Search");
             stage2.setScene(scene3);
             stage2.show();
             //
@@ -314,7 +314,7 @@ public class HelloApplication extends Application {
                             }
                         }
                     }else {
-                        System.out.println("Nicht alle felder sind Ausgefüllt");
+                        System.out.println("Not all fields have been filled in");
                     }
                 }
                 catch (Exception e1){
@@ -323,7 +323,7 @@ public class HelloApplication extends Application {
             });
             //
             box3.getChildren().addAll(send, back);
-            stage3.setTitle("Hinzugügen");
+            stage3.setTitle("ADD");
             stage3.setScene(scene2);
             stage3.show();
             //
@@ -425,11 +425,11 @@ public class HelloApplication extends Application {
         //
         ImageView picture = urlConverter(m.getUrl());
         Label id = new Label("ID: " + m.getId());
-        Label titel2 = new Label("Titel: " + m.getTitel());
+        Label titel2 = new Label("Title: " + m.getTitel());
         Label description2 = new Label("Description: " + m.getDescription());
         Rating ratingLabel2 = ratinInStars(m.getBewertung());
         Label genre2 = new Label("Genre: " + m.getGenre());
-        Label gesehen2 = new Label("Gesehen/Gelesen: " + m.isGesehen());
+        Label gesehen2 = new Label("Watched/Read: " + m.isGesehen());
         //
         root.getChildren().addAll(picture,id,titel2,description2,genre2,ratingLabel2,gesehen2,hBox);
         //
