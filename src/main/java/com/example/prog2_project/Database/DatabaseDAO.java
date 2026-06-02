@@ -20,16 +20,11 @@ public interface DatabaseDAO {
 
     Set<Medium> selectAllwithArt(String art);
 
-
     void deleteWhereTitleIs(String titel);
 
     void deleteWhereGenreIs(String genre);
 
-    //benutzt
     void deleteWhereArtIs(String art);
 
     void delete(int id);
-
-    //Noch funktion delte schreben für titel, vielleicht auch eine für dele alle wo....
-
 }
