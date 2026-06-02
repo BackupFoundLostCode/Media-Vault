@@ -76,7 +76,7 @@
             <version>3.1.0</version>
         </dependency>
 
-        <!-- Logging (wichtig für Hibernate) -->
+        <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
