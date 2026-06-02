@@ -3,7 +3,6 @@ package com.example.prog2_project.Medien;
 
 import jakarta.persistence.*;
 
-//Entweder generisch oder abstract
 @Entity
 public class Medium {
 
@@ -30,7 +29,7 @@ public class Medium {
     private boolean gesehen;
 
     @Column
-    private String url;//dafür da die url eines bildes zu spiechern
+    private String url;
 
     public Medium(String titel, String genre, String description, int bewertung, String art, boolean gesehen, String url) {
         this.titel = titel;
@@ -45,7 +44,6 @@ public class Medium {
     public Medium() {
     }
 
-    //Sollte ich vermutlich so machen das es einheitlich ausgibt so ist das bei unterschiedlichen werten unterdschiedlich versetzt.
     @Override
     public String toString() {
         return "|ID:| " + getId() + "\n" + "|TITEL:| " + getTitel() + "\n" +"|GENRE:| " + getGenre() + "\n" + "|DESCRIPTION:| " + getDescription() + "\n" +"|BEWERTUNG:| " + getBewertung() + "\n" + "|ART:| " + getArt() + "\n" +"\n";//Warum muss ich 2x"\n" machen ? einmal reicht doch eigentlich.
