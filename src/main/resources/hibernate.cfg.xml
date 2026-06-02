@@ -8,9 +8,9 @@
     <session-factory>
 
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/project</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">DEIN_PASSWORT</property>
+        <property name="hibernate.connection.url">YOUR_DB_URL</property>
+        <property name="hibernate.connection.username">YOUR_USERNAMEt</property>
+        <property name="hibernate.connection.password">YOUR_PASSWORD</property>
 
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
