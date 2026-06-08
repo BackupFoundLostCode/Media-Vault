@@ -132,11 +132,14 @@ public class HelloApplication extends Application {
         //
         suche.setOnAction(e -> {
             //
+            Set<Medium> set;
+            set= ne.selectAll();
+            //
             stage.close();
             //
             back.setOnAction(event -> {
                 //
-                box4.getChildren().clear();//Bei mherfchen neuem aufrufen ist mir das sonst teils abgeschmiert.
+                box4.getChildren().clear();
                 accordion.getPanes().clear();
                 titel.clear();
                 genre.clear();
@@ -152,13 +155,10 @@ public class HelloApplication extends Application {
             anord.getChildren().clear();
             anord.getChildren().addAll(sucheID, sucheTitel, sucheGenre,findeMediumArt,back);
             //
-            Set<Medium> set;
-            set= ne.selectAll();
-            //
             box4.setFillWidth(true);
             //
             for (Medium m : set) {
-                accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
             }
             scrollPane.setContent(accordion);
             scrollPane.setFitToWidth(true);
@@ -170,7 +170,7 @@ public class HelloApplication extends Application {
                 System.out.println(m.toString());
                 //
                 accordion.getPanes().clear();
-                accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
             });
             //
             sucheTitel.setOnAction(event -> {
@@ -181,7 +181,7 @@ public class HelloApplication extends Application {
                 //
                 accordion.getPanes().clear();
                 for(Medium m : lol){
-                    accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                    accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
                 }
             });
             //
@@ -193,7 +193,7 @@ public class HelloApplication extends Application {
                 //
                 accordion.getPanes().clear();
                 for(Medium m : hammer){
-                    accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url,  rating , gesehen));
+                    accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating , gesehen));
                 }
                 //
             });
@@ -206,21 +206,20 @@ public class HelloApplication extends Application {
                 //
                 accordion.getPanes().clear();
                 for(Medium m : bitte){
-                    accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                    accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
                 }
             });
             //
-            //Checken ob das klappt
             reload.setOnAction(event ->{
                 //
-                box4.getChildren().clear();//Bei mherfchen neuem aufrufen ist mir das sonst teils abgeschmiert.
+                box4.getChildren().clear();
                 accordion.getPanes().clear();
                 titel.clear();
                 genre.clear();
                 stage2.show();
                 //
                 for (Medium m : set) {
-                    accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                    accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
                 }
                 scrollPane.setContent(accordion);
                 scrollPane.setFitToWidth(true);
@@ -241,7 +240,6 @@ public class HelloApplication extends Application {
         //
         eintrag.setOnAction(e -> {
             //
-            //eintragHauptfunktion(ne, gesehen, accordion, stage, stage3, back, send, titel, url, genre, description, art, box3, scene2, rating);
             stage.close();
             //
             box3.getChildren().addAll(titel, genre, description, rating, art, gesehen,url);
@@ -370,7 +368,7 @@ public class HelloApplication extends Application {
         return imageView;
     }
     //
-    public TitledPane converstMedium(Accordion accordion,Database ne,Medium m,TextField titel, TextField description, TextField genre, TextField art, TextField url, Spinner<Integer> rating,CheckBox gesehen){
+    public TitledPane converstMedium(Set<Medium> set, Accordion accordion,Database ne,Medium m,TextField titel, TextField description, TextField genre, TextField art, TextField url, Spinner<Integer> rating,CheckBox gesehen){
         //
         VBox root = new VBox();
         HBox hBox = new HBox();
@@ -405,7 +403,7 @@ public class HelloApplication extends Application {
                 ne.update(m);
                 //
                 accordion.getPanes().clear();
-                accordion.getPanes().add(converstMedium(accordion, ne, m, titel, description, genre, art, url, rating, gesehen));
+                accordion.getPanes().add(converstMedium(set,accordion, ne, m, titel, description, genre, art, url, rating, gesehen));
                 //
             }
             catch (Exception e){
@@ -414,10 +412,10 @@ public class HelloApplication extends Application {
         });
         //
         deleteEintrag.setOnAction(event -> {
-            //aus gründen die ich nicht vertse darf ich die vraiablen nicht .clear();
             //
-            //Scheint zu klappen
             ne.delete(m.getId());
+            set.remove(m);
+            //Hier vielleich t dann beim setz noch den eintrag löschen des die ensprechnde id oder index zu dem hat onst ist der gelöschte dennoch in der angezeigten liste auch wen er aus der eigentlichen db weg ist.
             //
         });
         //
