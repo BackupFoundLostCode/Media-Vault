@@ -26,21 +26,8 @@ import java.util.Set;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        /*Soll noch können:
-         *
-         * WILL UND MUSS TUN:
-         * Kategorien/Genre verwalten fehlt vielleich je nach devnition
-         * Läd bei vieleln einträgen recht lange, lösbar über threads?
-         *
-         * ERLEDIGT:
-         * Suche ist vollständig von der logik.
-         * Eintrag/Hinzufügen ist von der logik her Vollständig.
-         * Löschen ist von der Logik her auch fertig.
-         * CSS setzen (außer das mit dem zähler aber geht eigentlich)
-         * Bewertung mit Sternen (Allerdings werden die Sterne nicht vollständig angeziegt und sind noch etwas zu nahjme beieinader)
-         * Bearbeiten klappt.
-         * */
-        Database ne = new Database(HibernateUtil.getSessionFactory());//braucht noch sessionfactory (ne scheinbar dich nicht, kann die DB methoden ausführen)
+        //
+        Database ne = new Database(HibernateUtil.getSessionFactory());
         String css = getClass().getResource("/styles.css").toExternalForm();
         //
         int realIndex = maxID();
@@ -50,20 +37,20 @@ public class HelloApplication extends Application {
         Stage stage3 = new Stage();
         //
         //VBoxen:
-        VBox box1= new VBox();//verwendet für Hauptsatge
-        VBox box2 = new VBox();//verwedndet für scene.
-        VBox box3 = new VBox();//verwendet für scene2
-        VBox box4 = new VBox();//verwendet für scene3
-        VBox box5 = new VBox();//Verwendet für
+        VBox box1= new VBox();
+        VBox box2 = new VBox();
+        VBox box3 = new VBox();
+        VBox box4 = new VBox();
+        VBox box5 = new VBox();
         //
         //HBoxen:
-        HBox anord = new HBox();//Verwedet in suche
+        HBox anord = new HBox();
         //
         //Scenes:
-        Scene scene = new Scene(box2, 1000, 1000);//verwendet für delete
-        Scene scene2 = new Scene(box3, 1000, 1000);//verwendet für eintrag
-        Scene scene3 = new Scene(box4, 1000, 1000);//verwendet für suche
-        Scene scene4 = new Scene(box5, 1000, 1000);//verwendet für bearbeiten
+        Scene scene = new Scene(box2, 1000, 1000);
+        Scene scene2 = new Scene(box3, 1000, 1000);
+        Scene scene3 = new Scene(box4, 1000, 1000);
+        Scene scene4 = new Scene(box5, 1000, 1000);
         Scene primaryScene = new Scene(box1, 1000, 1000);
 
         scene.getStylesheets().add(css);
@@ -73,26 +60,26 @@ public class HelloApplication extends Application {
         primaryScene.getStylesheets().add(css);
         //
         //Buttons
-        Button back = new Button("Back");//Wird überall verwendet.
-        Button sucheID = new Button("Search ID");//In Suche verwendet
-        Button sucheTitel = new Button("Search for title");//In Suche verwendet
-        Button sucheGenre = new Button("Search by genre");//In Suche verwendet.
+        Button back = new Button("Back");
+        Button sucheID = new Button("Search ID");
+        Button sucheTitel = new Button("Search for title");
+        Button sucheGenre = new Button("Search by genre");
         Button reload = new Button("Reload");
         //
-        Button findeMediumArt = new Button("“Search by medium”");//In Suche verwendet
-        Button send = new Button("Save");//In Eintrag verwendet.
+        Button findeMediumArt = new Button("“Search by medium”");
+        Button send = new Button("Save");
         //
-        Button suche = new Button("Vault");//Wird in der ersten Stage verwendet
-        Button eintrag = new Button("ADD");//Wird in der ersten Stage verwendet
+        Button suche = new Button("Vault");
+        Button eintrag = new Button("ADD");
         //
         //Labels:
-        Label hauptBanner = new Label();//Soll als Überschrift mittig oben in der ersten Scene angezeigt werden also auch wo Suche delte tec stehen (bearbeiten generell noch bauen)
+        Label hauptBanner = new Label();
         hauptBanner.getStyleClass().add("title-label");
         hauptBanner.setText("THE MEDIA VAULT");
         //
         //Text
         Text unterteilung = new Text();
-        unterteilung.getStyleClass().add("wabeldi");//Warum klappt das ni
+        unterteilung.getStyleClass().add("wabeldi");
         unterteilung.setText("Additional fields for entering a change:");
         //
         //TextFiekd
@@ -100,7 +87,7 @@ public class HelloApplication extends Application {
         titel.setPromptText("Title");
         TextField genre = new TextField();
         genre.setPromptText("Genre");
-        TextField description = new TextField();//
+        TextField description = new TextField();
         description.setPromptText("Description");
         TextField art = new TextField();
         art.setPromptText("Type");
@@ -112,7 +99,7 @@ public class HelloApplication extends Application {
         findByArt.setPromptText("Type");
         //
         //CheckBoxen:
-        CheckBox gesehen = new CheckBox("Watched/Read?");//Noch bei bearbeiten hinzufügen, relativ wichtig.
+        CheckBox gesehen = new CheckBox("Watched/Read?");
         //
         //Accordeon:
         Accordion accordion = new Accordion();
@@ -121,13 +108,13 @@ public class HelloApplication extends Application {
         Spinner<Integer> rating = new Spinner<>(0,5,0);//
         Spinner<Integer> idForSuche = new Spinner<>(0,realIndex,0);//Ok lol das hat perfekt geklappt.
         //
-        //Erste Stage: Hauptstage.
+        //Stage:
         box1.setSpacing(20);
         box1.setAlignment(Pos.CENTER);
         //
         box1.getChildren().addAll(hauptBanner, suche, eintrag);
         stage.setScene(primaryScene);
-        stage.setTitle("Menu");//Setzt dem fenster einenNamen oben.
+        stage.setTitle("Menu");
         stage.show();
         //
         suche.setOnAction(e -> {
@@ -186,7 +173,7 @@ public class HelloApplication extends Application {
             });
             //
             sucheGenre.setOnAction(event -> {
-                //Klappt
+                //
                 String ff = genre.getText();
                 Set<Medium> hammer = ne.selectAllwithGenre(ff);
                 System.out.println(hammer.toString());
@@ -199,7 +186,7 @@ public class HelloApplication extends Application {
             });
             //
             findeMediumArt.setOnAction(event -> {
-                //Klappt
+                //
                 String gg = findByArt.getText();
                 Set<Medium> bitte = ne.selectAllwithArt(gg);
                 System.out.println(bitte.toString());
@@ -225,12 +212,12 @@ public class HelloApplication extends Application {
                 scrollPane.setFitToWidth(true);
                 scrollPane.setFitToHeight(false);
                 //
-                box4.getChildren().clear();//Eventuell auch weil ich das nicht gemacht habe ständig abgeschmiert.
+                box4.getChildren().clear();
                 box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
                 //
             });
             //
-            box4.getChildren().clear();//Eventuell auch weil ich das nicht gemacht habe ständig abgeschmiert.
+            box4.getChildren().clear();
             box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
             stage2.setTitle("Search");
             stage2.setScene(scene3);
@@ -332,8 +319,8 @@ public class HelloApplication extends Application {
     public Rating ratinInStars(int ratingInpurInt){
         //
         Rating stars =  new Rating();
-        stars.setMax(5);//sollte maximales ratin sein
-        stars.setRating(ratingInpurInt);//Ist das rating in starnen dann die ich vom obejkt als int übergebe
+        stars.setMax(5);
+        stars.setRating(ratingInpurInt);
         stars.setPrefHeight(33);
         //
         return stars;
@@ -342,7 +329,7 @@ public class HelloApplication extends Application {
     //
     public int maxID() {
         //
-        Database ne = new Database(HibernateUtil.getSessionFactory());//Eventell besser machen.
+        Database ne = new Database(HibernateUtil.getSessionFactory());
         int max = 0;
         Set<Medium> set = ne.selectAll();
         //
@@ -358,7 +345,7 @@ public class HelloApplication extends Application {
     //
     public ImageView urlConverter(String url){
         //
-        Pane root = new Pane();//Brauche ich schibar wenn ich ein bild anzeigen will geht icht eifnach sio in die HBox.
+        Pane root = new Pane();
         Image image = new Image(url);
         ImageView  imageView = new ImageView(image);
         imageView.setFitWidth(150);
@@ -373,8 +360,8 @@ public class HelloApplication extends Application {
         VBox root = new VBox();
         HBox hBox = new HBox();
         //
-        Button updateEintrag = new Button("Change");//Wird in der ersten Stage verwendet
-        Button deleteEintrag = new Button("Delete");//Wird in der ersten Stage verwendet
+        Button updateEintrag = new Button("Change");
+        Button deleteEintrag = new Button("Delete");
         //
         updateEintrag.setOnAction(event -> {
             try {

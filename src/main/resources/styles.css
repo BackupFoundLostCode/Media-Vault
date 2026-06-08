@@ -58,7 +58,6 @@
     -fx-background-color: transparent;
 }
 
-/* Pfeile */
 .spinner .increment-arrow-button,
 .spinner .decrement-arrow-button {
     -fx-background-color: #2d2d2d;

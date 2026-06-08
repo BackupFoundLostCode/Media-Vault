@@ -16,8 +16,7 @@ public class Database implements DatabaseDAO {
     public Database(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
-
-    //Scheint zu klappen
+    //
     @Override
     public void insert(Medium media) {
         Session session = sessionFactory.openSession();
@@ -29,7 +28,6 @@ public class Database implements DatabaseDAO {
         //
     }
     //
-    //Checken obs klappt
     @Override
     public void update(Medium medium){
         //
@@ -142,7 +140,6 @@ public class Database implements DatabaseDAO {
         //
     }
     //
-    //Benutzt (Klappt)
     @Override
     public void deleteWhereTitleIs(String titel){
         Session session = sessionFactory.openSession();
@@ -163,7 +160,7 @@ public class Database implements DatabaseDAO {
         session.close();
         //
     }
-    //Benutzt (klappt)
+    //
     @Override
     public void deleteWhereGenreIs(String genre){
         Session session = sessionFactory.openSession();
@@ -185,7 +182,6 @@ public class Database implements DatabaseDAO {
         session.close();
     }
     //
-    //benutzt (klappt)
     @Override
     public void deleteWhereArtIs(String art){
         Session session = sessionFactory.openSession();
@@ -207,7 +203,6 @@ public class Database implements DatabaseDAO {
         //
     }
     //
-    //Benutzt (Klappt)
     @Override
     public void delete(int id) {
         Session session = sessionFactory.openSession();
