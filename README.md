@@ -38,6 +38,6 @@ After making changes, it is recommended to click **"Reload"** to refresh the lis
 There are still a few known issues in the current implementation, including:
 
 - Slow loading performance in certain cases  
-- Occasional persistence of outdated rating values after editing entries  
+- ~Occasional persistence of outdated rating values after editing entries  ~
 
 These issues are currently under investigation and will be addressed in future updates.
