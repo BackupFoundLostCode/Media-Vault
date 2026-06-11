@@ -16,6 +16,9 @@ public interface DatabaseDAO {
 
     Set<Medium> selectAllwithTitel(String titel);
 
+    //
+    Set<Medium> selectAllWithRating(int rating);
+
     Set<Medium> selectAllwithGenre(String genre);
 
     Set<Medium> selectAllwithArt(String art);

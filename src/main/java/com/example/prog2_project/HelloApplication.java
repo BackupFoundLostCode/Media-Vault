@@ -65,8 +65,9 @@ public class HelloApplication extends Application {
         Button sucheTitel = new Button("Search for title");
         Button sucheGenre = new Button("Search by genre");
         Button reload = new Button("Reload");
+        Button ratingSearch = new Button("Rating");
         //
-        Button findeMediumArt = new Button("“Search by medium”");
+        Button findeMediumArt = new Button("Search by medium");
         Button send = new Button("Save");
         //
         Button suche = new Button("Vault");
@@ -140,7 +141,7 @@ public class HelloApplication extends Application {
             ScrollPane  scrollPane = new ScrollPane();
             //
             anord.getChildren().clear();
-            anord.getChildren().addAll(sucheID, sucheTitel, sucheGenre,findeMediumArt,back);
+            anord.getChildren().addAll(sucheID, sucheTitel, sucheGenre,findeMediumArt,ratingSearch,back);
             //
             box4.setFillWidth(true);
             //
@@ -150,6 +151,16 @@ public class HelloApplication extends Application {
             scrollPane.setContent(accordion);
             scrollPane.setFitToWidth(true);
             scrollPane.setFitToHeight(false);
+            //
+            ratingSearch.setOnAction(event -> {
+                int ratingFromField = rating.getValue();
+                Set<Medium> ratings = ne.selectAllWithRating(ratingFromField);
+                //
+                accordion.getPanes().clear();
+                for (Medium m : ratings) {
+                    accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                }
+            });
             //
             sucheID.setOnAction(event -> {
                 int ii = idForSuche.getValue();
@@ -402,7 +413,7 @@ public class HelloApplication extends Application {
             //
             ne.delete(m.getId());
             set.remove(m);
-            //Hier vielleich t dann beim setz noch den eintrag löschen des die ensprechnde id oder index zu dem hat onst ist der gelöschte dennoch in der angezeigten liste auch wen er aus der eigentlichen db weg ist.
+            //Hier vielleicht dann beim setz noch den eintrag löschen des die ensprechnde id oder index zu dem hat onst ist der gelöschte dennoch in der angezeigten liste auch wen er aus der eigentlichen db weg ist.
             //
         });
         //
