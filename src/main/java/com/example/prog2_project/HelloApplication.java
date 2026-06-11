@@ -356,13 +356,11 @@ public class HelloApplication extends Application {
     //
     public ImageView urlConverter(String url){
         //
-        Pane root = new Pane();
         Image image = new Image(url);
         ImageView  imageView = new ImageView(image);
         imageView.setFitWidth(150);
         imageView.setFitHeight(200);
-        root.getChildren().add(imageView);
-
+        //
         return imageView;
     }
     //
@@ -413,7 +411,6 @@ public class HelloApplication extends Application {
             //
             ne.delete(m.getId());
             set.remove(m);
-            //Hier vielleicht dann beim setz noch den eintrag löschen des die ensprechnde id oder index zu dem hat onst ist der gelöschte dennoch in der angezeigten liste auch wen er aus der eigentlichen db weg ist.
             //
         });
         //
