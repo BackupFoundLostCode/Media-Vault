@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 import javafx.geometry.Pos;
+import org.controlsfx.control.textfield.TextFields;
 
 
 import java.io.IOException;
@@ -62,12 +63,12 @@ public class HelloApplication extends Application {
         //Buttons
         Button back = new Button("Back");
         Button sucheID = new Button("Search ID");
-        Button sucheTitel = new Button("Search for title");
-        Button sucheGenre = new Button("Search by genre");
-        Button reload = new Button("Reload");
-        Button ratingSearch = new Button("Rating");
+        Button sucheTitel = new Button("Search for Title");
+        Button sucheGenre = new Button("Search by Genre");
+        Button reload = new Button("Reload List");
+        Button ratingSearch = new Button("Search by Rating");
         //
-        Button findeMediumArt = new Button("Search by medium");
+        Button findeMediumArt = new Button("Search by Medium");
         Button send = new Button("Save");
         //
         Button suche = new Button("Vault");
@@ -84,20 +85,44 @@ public class HelloApplication extends Application {
         unterteilung.setText("Additional fields for entering a change:");
         //
         //TextFiekd
-        TextField titel = new TextField();
+        TextField titel = new TextField();//Keine vorschläge
         titel.setPromptText("Title");
+
         TextField genre = new TextField();
         genre.setPromptText("Genre");
-        TextField description = new TextField();
+        TextFields.bindAutoCompletion(genre,
+                "Bildung",
+                "Fantasy",
+                "Action",
+                "Manifest",
+                "Klassiker",
+                "Novel",
+                "Crime"
+        );
+        //
+        TextField description = new TextField();//keine vorschläge
         description.setPromptText("Description");
+        //
         TextField art = new TextField();
         art.setPromptText("Type");
-        TextField url = new TextField();
+        TextFields.bindAutoCompletion(art,
+                "Book",
+                "Show",
+                "Movie"
+        );
+        //
+        TextField url = new TextField();//Keine Vorschläge
         url.setPromptText("URL");
-        TextField fieldForTitle = new TextField();
+        //
+        TextField fieldForTitle = new TextField();//Keine Vorschläge
         fieldForTitle.setPromptText("Title");
+        //
         TextField findByArt = new TextField();
-        findByArt.setPromptText("Type");
+        findByArt.setPromptText("Type");  TextFields.bindAutoCompletion(findByArt,
+                "Book",
+                "Show",
+                "Movie"
+        );
         //
         //CheckBoxen:
         CheckBox gesehen = new CheckBox("Watched/Read?");
