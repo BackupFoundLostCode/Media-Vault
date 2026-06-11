@@ -238,25 +238,4 @@ public class Database implements DatabaseDAO {
         //
     }
     //
-    /*
-    //Methoden um aus liste zu laden und in DB zu speichern
-    public Medium zerhackeQR() {
-        //Idee durchsuche string nach tzeichen und trenne dann ab, evenbuell mit for und einer zähletvariable für anzahl | dann auf die variablen legen
-
-        //Noch txt öffnen zeile lesen un in String mit namen inDB speichern
-
-        String[] parts = inDB.split("\\|");//Danke google, das macht6 es sehr viel einfacher. ERKLÄRUNG FÜR JONAS: Hab est versucht mit for und fis das zu trenen und dan immer zuzuorden, geht viel einfacher mit der slit methode XDz
-
-        String name = parts[0];
-        String genre = parts[1];
-        String desc = parts[2];
-        int punkte = Integer.parseInt(parts[3]);
-        String art = parts[4];
-        boolean gesehen = Boolean.parseBoolean(parts[5]);
-        String url = parts[6];
-
-        return new Medium(name, genre, desc, punkte,art,gesehen,url);
-    }
-     */
-
 }
