@@ -22,7 +22,7 @@ import org.controlsfx.control.textfield.TextFields;
 
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.*;
 
 public class HelloApplication extends Application {
     @Override
@@ -67,6 +67,7 @@ public class HelloApplication extends Application {
         Button sucheGenre = new Button("Search by Genre");
         Button reload = new Button("Reload List");
         Button ratingSearch = new Button("Search by Rating");
+        Button sortByID = new Button("Sort by ID");
         //
         Button findeMediumArt = new Button("Search by Medium");
         Button send = new Button("Save");
@@ -166,7 +167,7 @@ public class HelloApplication extends Application {
             ScrollPane  scrollPane = new ScrollPane();
             //
             anord.getChildren().clear();
-            anord.getChildren().addAll(sucheID, sucheTitel, sucheGenre,findeMediumArt,ratingSearch,back);
+            anord.getChildren().addAll(sucheID, sucheTitel, sucheGenre,findeMediumArt,ratingSearch,sortByID,back);
             //
             box4.setFillWidth(true);
             //
@@ -251,6 +252,29 @@ public class HelloApplication extends Application {
                 box4.getChildren().clear();
                 box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
                 //
+            });
+            //
+            sortByID.setOnAction(event -> {
+                //set ist schon alles drinnen nur noch nicht sortiert
+                List<Medium> sortedSet = new ArrayList<>(set);
+                sortedSet.sort(Comparator.comparingInt(Medium::getId));
+                //
+                box4.getChildren().clear();
+                accordion.getPanes().clear();
+                titel.clear();
+                genre.clear();
+                stage2.show();
+                //
+                for (Medium m : sortedSet) {
+                    accordion.getPanes().add(converstMedium(set, accordion, ne, m, titel, description, genre, art, url,  rating, gesehen));
+                }
+                scrollPane.setContent(accordion);
+                scrollPane.setFitToWidth(true);
+                scrollPane.setFitToHeight(false);
+                //
+                box4.getChildren().clear();
+                box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
+
             });
             //
             box4.getChildren().clear();
