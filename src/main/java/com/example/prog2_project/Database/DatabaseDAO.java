@@ -3,7 +3,8 @@ package com.example.prog2_project.Database;
 import com.example.prog2_project.Medien.Medium;
 
 import java.util.Set;
-
+/*Das hier ist nur ein DAO interface, ist nur dafür da damit ich persönlich keine Methoden vergesse die ich brauche/machen möchte. Das übergibbt mann dann der DB klasse.
+* Diese zwingt einen dann die Methoden hier dort zu definieren.*/
 public interface DatabaseDAO {
 
     void insert(Medium media);

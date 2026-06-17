@@ -1,4 +1,9 @@
 package com.example.prog2_project.Medien;
+/*Medium ist die Hauptklasse von ihr leiten sch alle anderen Medien ab.
+* Da es am Ende nur auf den Klassentyp ankommt, sind hier auch alle Variablen und dergleichen deffiniert die die anderen klassen ebenfalls haben, die anderen klassen impeleniternen nichts neues.
+* Da es sich hier um die Elternklasse aller anderen handelt, ist diese für die spätere verwendung mit hibernate konfiguriert, wodurch alle anderen das ebenfals sind.
+* Was bedeutet es, im grunde nur da die Hibernate schnittstelle in der lage ist mit der DB zu kommunizieren und zu verstehen, dass es sich hier intern dann um einen Table handeln soll, dessen Colums denen variabnen nachempfunden ist.
+* @Entity kennzeichnet die klasse als eine solche Table-klasse die restlichen Bezeichner sind im grunde selbsterklärend in dem Kontext.*/
 
 
 import jakarta.persistence.*;

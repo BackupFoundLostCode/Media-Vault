@@ -19,10 +19,226 @@ import javafx.stage.Stage;
 import org.controlsfx.control.Rating;
 import javafx.geometry.Pos;
 import org.controlsfx.control.textfield.TextFields;
-
-
 import java.io.IOException;
 import java.util.*;
+
+/**
+ * Dies ist die Hauptklasse der Anwendung "The Media Vault".
+ * Sie stellt die komplette grafische Benutzeroberfläche bereit
+ * und verbindet die GUI mit der Datenbank.
+ *
+ * Einige Bereiche dieser Klasse sind im Laufe der Entwicklung
+ * entstanden und wurden bewusst beibehalten, da sie später
+ * eventuell noch erweitert oder wiederverwendet werden können.
+ *
+ * Was macht start(Stage stage)?
+ *
+ * Diese Methode startet die gesamte Anwendung.
+ * Hier werden alle Fenster, Szenen, Buttons, Textfelder,
+ * Layouts und Event-Handler erzeugt.
+ *
+ * Zunächst wird eine Verbindung zur Datenbank aufgebaut,
+ * damit alle Medien geladen und gespeichert werden können.
+ *
+ * Danach werden:
+ * - Stages erstellt
+ * - Scenes erstellt
+ * - VBoxen und HBoxen angelegt
+ * - Buttons erzeugt
+ * - Labels erzeugt
+ * - Textfelder erzeugt
+ * - Spinner erzeugt
+ * - Suchfunktionen registriert
+ *
+ * Anschließend wird das Hauptmenü angezeigt.
+ *
+ * Der Button "Vault":
+ * Öffnet die Suchansicht.
+ * Dort werden alle Medien geladen und innerhalb eines
+ * Accordions dargestellt.
+ *
+ * Der Button "ADD":
+ * Öffnet die Eingabemaske zum Erstellen neuer Medien.
+ *
+ * Suchfunktionen:
+ *
+ * Search ID:
+ * Liest die gewählte ID aus dem Spinner aus und sucht
+ * das entsprechende Medium in der Datenbank.
+ *
+ * Search for Title:
+ * Sucht alle Medien mit dem angegebenen Titel.
+ *
+ * Search by Genre:
+ * Sucht alle Medien mit dem angegebenen Genre.
+ *
+ * Search by Rating:
+ * Sucht alle Medien mit der angegebenen Bewertung.
+ *
+ * Search by Medium:
+ * Sucht alle Medien eines bestimmten Typs
+ * (Book, Movie oder Show).
+ *
+ * Reload List:
+ * Lädt die komplette Liste erneut und setzt
+ * Suchfilter zurück.
+ *
+ * Sort by ID:
+ * Sortiert alle geladenen Medien anhand ihrer ID.
+ *
+ * Save:
+ * Liest die Werte aus allen Eingabefeldern aus diese Werte werden später zu Obejtatributen.
+ *
+ * Anschließend wird geprüft:
+ * - Titel vorhanden?
+ * - Genre vorhanden?
+ * - Beschreibung vorhanden?
+ * - Typ vorhanden?
+ * - URL vorhanden?
+ *
+ * Sind alle Felder gefüllt, wird abhängig vom
+ * gewählten Typ ein entsprechendes Objekt erzeugt:
+ *
+ * Book  -> neues Book Objekt
+ * Show  -> neues Show Objekt
+ * Movie -> neues Movie Objekt
+ *
+ * Dieses Objekt wird anschließend über die
+ * Database-Klasse gespeichert.
+ *
+ *
+ * Was macht ratinInStars(int ratingInputInt)?
+ *
+ * Diese Methode wandelt eine numerische Bewertung
+ * in ein grafisches Sterne-Rating um.
+ *
+ * Zunächst wird ein neues Rating-Objekt erzeugt.
+ * Danach wird:
+ *
+ * stars.setMax(5);
+ *
+ * gesetzt, wodurch maximal 5 Sterne angezeigt werden.
+ *
+ * Anschließend wird die übergebene Bewertung gesetzt:
+ *
+ * stars.setRating(ratingInputInt);
+ *
+ * Danach wird die Höhe festgelegt und das fertige
+ * Rating-Objekt zurückgegeben.
+ *
+ *
+ * Was macht maxID()?
+ *
+ * Diese Methode bestimmt die aktuell größte ID
+ * aller gespeicherten Medien.
+ *
+ * Zunächst werden alle Medien aus der Datenbank geladen.
+ *
+ * Anschließend wird über jedes Medium iteriert.
+ *
+ * Ist die aktuelle ID größer als die bisher
+ * gespeicherte Maximal-ID, wird diese übernommen.
+ *
+ * Am Ende wird die höchste gefundene ID zurückgegeben.
+ *
+ * Die Methode wird verwendet, damit der Such-Spinner
+ * keine ungültigen IDs anbietet.
+ *
+ *
+ * Was macht urlConverter(String url)?
+ *
+ * Diese Methode lädt ein Bild aus einer URL.
+ *
+ * Zunächst wird ein Image-Objekt erzeugt:
+ *
+ * Image image = new Image(url);
+ *
+ * Danach wird ein ImageView erstellt:
+ *
+ * ImageView imageView = new ImageView(image);
+ *
+ * Anschließend werden Breite und Höhe festgelegt,
+ * damit alle Bilder ein einheitliches Format besitzen.
+ *
+ * Das fertige ImageView wird danach zurückgegeben.
+ *
+ *
+ * Was macht converstMedium(...)?
+ *
+ * Diese Methode erzeugt die komplette grafische
+ * Darstellung eines Mediums innerhalb des Accordions.
+ *
+ * Zunächst werden Layoutcontainer erstellt:
+ *
+ * - VBox
+ * - HBox
+ *
+ * Danach werden die Buttons:
+ *
+ * - Change
+ * - Delete
+ *
+ * erzeugt.
+ *
+ * Change:
+ *
+ * Prüft alle Eingabefelder.
+ *
+ * Sind Felder nicht leer, werden die entsprechenden
+ * Werte in das Medium übernommen:
+ *
+ * - Titel
+ * - Beschreibung
+ * - Genre
+ * - Art
+ * - URL
+ * - Bewertung
+ * - Gesehen Status
+ *
+ * Anschließend wird:
+ *
+ * ne.update(m);
+ *
+ * aufgerufen und das Medium in der Datenbank aktualisiert.
+ *
+ * Danach wird die Darstellung im Accordion neu aufgebaut.
+ *
+ *
+ * Delete:
+ *
+ * Löscht das Medium anhand seiner ID aus der Datenbank:
+ *
+ * ne.delete(m.getId());
+ *
+ * Zusätzlich wird das Objekt aus dem aktuell geladenen
+ * Set entfernt.
+ *
+ *
+ * Darstellung:
+ *
+ * Die Methode erzeugt:
+ *
+ * - Bild
+ * - ID
+ * - Titel
+ * - Beschreibung
+ * - Genre
+ * - Bewertung
+ * - Gesehen Status
+ *
+ * und fügt diese Komponenten in die VBox ein.
+ *
+ * Anschließend wird ein TitledPane erstellt.
+ *
+ * Als Überschrift wird:
+ *
+ * Titel [Art]
+ *
+ * verwendet.
+ *
+ * Dieses TitledPane wird anschließend zurückgegeben
+ * und im Accordion angezeigt.
+ */
 
 public class HelloApplication extends Application {
     @Override
@@ -79,6 +295,8 @@ public class HelloApplication extends Application {
         Label hauptBanner = new Label();
         hauptBanner.getStyleClass().add("title-label");
         hauptBanner.setText("THE MEDIA VAULT");
+        Label idField = new Label("ID:");
+        Label ratingField = new Label("Rating:");
         //
         //Text
         Text unterteilung = new Text();
@@ -163,7 +381,7 @@ public class HelloApplication extends Application {
             });
             //
             VBox vbox2 = new VBox();
-            vbox2.getChildren().addAll(idForSuche,titel,genre, findByArt);
+            vbox2.getChildren().addAll(idField,idForSuche,titel,genre, findByArt);
             ScrollPane  scrollPane = new ScrollPane();
             //
             anord.getChildren().clear();
@@ -250,7 +468,7 @@ public class HelloApplication extends Application {
                 scrollPane.setFitToHeight(false);
                 //
                 box4.getChildren().clear();
-                box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
+                box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,ratingField,rating,url, gesehen,reload);
                 //
             });
             //
@@ -278,7 +496,7 @@ public class HelloApplication extends Application {
             });
             //
             box4.getChildren().clear();
-            box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,rating,url, gesehen,reload);
+            box4.getChildren().addAll(scrollPane,anord,vbox2, unterteilung, description ,ratingField,rating,url, gesehen,reload);
             stage2.setTitle("Search");
             stage2.setScene(scene3);
             stage2.show();

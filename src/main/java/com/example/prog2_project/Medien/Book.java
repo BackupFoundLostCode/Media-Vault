@@ -1,7 +1,7 @@
 package com.example.prog2_project.Medien;
 
 import jakarta.persistence.Entity;
-
+/*Kindklasse von Medium mit den gleichen eigenschaften wie Medium. Weitere Erklärung siehe JavaDoc in Medium-klasse.*/
 @Entity
 public class Book extends Medium {
 
